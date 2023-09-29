@@ -3,14 +3,14 @@
 - puma
 - ver 5.6.5
 - 再アクセス可
-![puma.version](raisetech/img/puma.version.png) 
-![puma](raisetech/img/puma.png)
+![puma.version](/img/puma.version.png) 
+![puma](/img/puma.png)
 ## DBサーバーの名前とバージョン
 - mySQL
 - ver 8.0.34
 - 再アクセス可
-![mysql.version](raisetech/img/mysql.version.png)
-![mysql](raisetech/img/mysql.png)
+![mysql.version](/img/mysql.version.png)
+![mysql](/img/mysql.png)
 ## Rails構成管理ツールの名前
 - bundler
 ## 今回の学習から学んだこと
@@ -23,5 +23,5 @@
 - DBとSQL
 ## 実践課題
 - サンプルアプリケーションのデプロイ
-![sampleapp](raisetech/img/sampleapp.png)
+![sampleapp](/img/sampleapp.png)
 
