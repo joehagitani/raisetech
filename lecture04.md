@@ -22,5 +22,5 @@
 ![EC2接続](/img/ec2connect.png)  
 
 ## EC2からRDSへ接続
-![EC2からRDS](/img/ec2-rds.png)  
+![EC2→RDS](/img/ec2-rds.png)  
 
