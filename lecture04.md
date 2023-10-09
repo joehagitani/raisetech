@@ -19,7 +19,7 @@
 ![RDS作成](/img04.2/rds3.png)  
 
 ### RDSセキュリティ
-![RDSセキュリティ1](/img04.2/rdssecurity3.1.png)  
+![RDSセキュリティ1](/img04.2/rdesecurity3.1.png)  
 ![RDSセキュリティ2](/img04.2/rdssecurity3.png)  
 
 ## EC2接続
