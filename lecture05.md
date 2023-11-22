@@ -182,7 +182,7 @@ $ puma -v
 * インバウンドルールに3000ポートを追加
 * `http://IPアドレス:3000/`でアクセス
 
-  ![3000port](/img/puma/port3000.png)
+  ![3000port](/img/lecture05/pume/port3000.png)
 
 
 
@@ -207,7 +207,7 @@ $ sudo systemctl status nginx
 * EC2のインバウンドルールに80ポートを追加
 * `http://パブリックIPv4アドレス/`でアクセス
 
-  ![nginx](/img/nginx/welcome.to.nginx.png)
+  ![nginx](/img/lecture05/nginx/welcome.to.nginx.png)
 
 
 * Nginxの設定ファイルを編集する
@@ -409,7 +409,7 @@ $ ps -ef | grep unicorn | grep -v grep
 
 ````
 * `http://パブリックIPv4アドレス/`でアクセス
-  ![unicorn](/img/unicorn/public.ip.access.png)画像
+  ![unicorn](/img/lecture05/unicorn/public.ip.access.png)画像
 
 * CSSが当てられていない時に対処したこと
 ````
@@ -439,16 +439,16 @@ $ rake unicorn:start
 
 ## ELB(ALB)追加
 ### 1. ターゲットグループ作成
-![alb_target-group](/img/alb/rtg.group.png)
+![alb_target-group](/img/lecture05/alb/rtg.group.png)
 ### 2. セキュリティグループ作成
-![alb_sg-detail](/img/alb/security.group.png)
+![alb_sg-detail](/img/lecture05/alb/security.group.png)
 ### 3. ロードバランサー作成
 * リスナーとルール
-![alb_listner&rule](/img/alb/role.png)
+![alb_listner&rule](/img/lecture05/alb/role.png)
 * ネットワークマッピング
-![alb_NetworkMapping](/img/alb/alb.netmap.png)
+![alb_NetworkMapping](/img/lecture05/alb/alb.netmap.png)
 * セキュリティ
-![alb_sg](/img/alb/alb.security.png)
+![alb_sg](/img/lecture05/alb/alb.security.png)
 ### 4. DNSでアクセスする
 * `development.rb`に追記
 ````
@@ -459,13 +459,13 @@ config.host << "ALBのDNS名"
 ````
 * NginxとUnicornを再起動
 * DNS名でアクセスし確認
-  ![alb_DNS](/img/alb/dns.access.png)
+  ![alb_DNS](/img/lecture05/alb/dns.access.png)
 
 ## S3追加
 ### 1. バケットを作成
-![s3_backet](/img/s3/s3.bucket.png)
+![s3_backet](/img/lecture05/s3/s3.bucket.png)
 ### 2.S3にアクセスするためのIAMユーザーを作成
-![s3_IAMrole](/img/s3/s3.iam.role.png)
+![s3_IAMrole](/img/lecture05/s3/s3.iam.role.png)
 ### 3. Railsの設定を変更
 * config/storage.ymlの設定を変更
 ````
@@ -487,21 +487,21 @@ $ config.active.storage.service:amazon
 # ローカルからs3にオブジェクトをアップロード
 $ aws s3 cp [アップロードしたいローカルファイルのパス] s3://バケット名/フォルダ名/
 ````
-![s3_upload-local](/img/s3/s3.up.png)
-![s3_upload](/img/s3/s3.up.kakunin.png)
+![s3_upload-local](/img/lecture05/s3/s3.up.png)
+![s3_upload](/img/lecture05/s3/s3.up.kakunin.png)
 
 ### 5. S3で確認
 ````
 # s3からローカルにオブジェクトをダウンロード
 $ aws s3 cp s3://バケット名/オブジェクトのキー [ダウンロード先のローカルフォルダのパス]
 ````
-![s3_download](/img/s3/s3test.file.png)
-![s3_download-local](/img/s3/s3.dl.png)
+![s3_download](/img/lecture05/s3/s3test.file.png)
+![s3_download-local](/img/lecture05/s3/s3.dl.png)
 ````
 # オブジェクト削除
 $ aws s3 rm s3://バケット名/オブジェクトのキー
 ````
-![s3_delete-local](/img/s3/s3.delete.cm.png)
+![s3_delete-local](/img/lecture05/s3/s3.delete.cm.png)
 
 ## インフラ構成図
-![lecture05_diagram](/img/diagram/lecture05.diagram2.pdf)
+![lecture05_diagram](/img/lecture05/diagram/lecture05.diagram2.pdf)
