@@ -191,7 +191,7 @@ $ puma -v
 
 
 ### 3. NginxとUnicornに分けて動作確認
-#### 3-1. Nginx側の設定
+#### 3-1. Nginx
 * Nginxをインストール
 ````
 # amazon linux extrasでNginxをインストール
@@ -493,14 +493,14 @@ $ aws s3 cp [アップロードしたいローカルファイルのパス] s3://
 ![s3_upload-local](/img/lecture05/s3/s3.up.png)
 ![s3_upload](/img/lecture05/s3/s3.up.kakunin.png)
 
-### 5. S3で確認
+### 6. S3で確認
 ````
 # s3からローカルにオブジェクトをダウンロード
 $ aws s3 cp s3://バケット名/オブジェクトのキー [ダウンロード先のローカルフォルダのパス]
 ````
 ![s3_download](/img/lecture05/s3/s3test.file.png)
 ![s3_download-local](/img/lecture05/s3/s3.dl.png)
-````
+
 * オブジェクトを削除
 ````
 $ aws s3 rm s3://バケット名/オブジェクトのキー
