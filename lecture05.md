@@ -510,4 +510,4 @@ $ aws s3 rm s3://バケット名/オブジェクトのキー
 ![s3_delete-local](/img/lecture05/s3/s3.delete.cm.png)
 
 ## 構成図
-![lecture05_diagram](/img/lecture05/diagram/lecture05.diagram2.png)
+![lecture05_diagram](/img/lecture05/diagram/lecture05.drawio.png)
