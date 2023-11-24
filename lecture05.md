@@ -182,7 +182,7 @@ $ puma -v
 * インバウンドルールに3000ポートを追加
 * `http://IPアドレス:3000/`でアクセス
 
-  ![3000port](/img/lecture05/pume/port3000.png)
+  ![3000port](/img/lecture05/puma/port3000.png)
 
 
 
@@ -191,7 +191,7 @@ $ puma -v
 
 
 ### 3. NginxとUnicornに分けて動作確認
-3-1. Nginx側の設定
+#### 3-1. Nginx側の設定
 * Nginxをインストール
 ````
 # amazon linux extrasでNginxをインストール
@@ -214,7 +214,7 @@ $ sudo systemctl status nginx
 ````
 $ sudo vim /etc/nginx/nginx.conf
 ````
-設定内容
+* 設定内容
 ````
 # For more information on configuration, see:
 #   * Official English Documentation: http://nginx.org/en/docs/
@@ -309,7 +309,7 @@ $ sudo systemctl enable nginx
 ````
 
 
-3-2. Unicorn
+#### 3-2. Unicorn
 * unicorn.rbを編集
 ````
 # configディレクトリのunicorn.rbを編集
@@ -341,8 +341,9 @@ $ bundle install
 $ rails g task unicorn
 ````
 
-# すると lib/tasks ディレクトリに unicorn.rake というファイルが生成される。
-# このファイルを開いて以下を追加。
+すると lib/tasks ディレクトリに unicorn.rake というファイルが生成される。
+このファイルを開いて以下を追加。
+
 ````
 namespace :unicorn do
  
@@ -393,10 +394,10 @@ namespace :unicorn do
  
 end
 
-````
-````
 # ↑def unicorn_pid の File.read の引数のパスは /home/{ユーザ名}/{Railsアプリケーション名}/tmp/unicorn.pid とする。
+
 ````
+
 * Unicornを起動
 ````
 # Unicorn起動
@@ -409,12 +410,13 @@ $ ps -ef | grep unicorn | grep -v grep
 
 ````
 * `http://パブリックIPv4アドレス/`でアクセス
-  ![unicorn](/img/lecture05/unicorn/public.ip.access.png)画像
+  ![unicorn](/img/lecture05/unicorn/public.ip.access.png)
 
-* CSSが当てられていない時に対処したこと
+#### CSSが当てられていない時に対処したこと
+
+ログを確認すると、NginxがCSSファイルにアクセスするためにアクセス権限を変更する必要があるという内容が出ているので以下を行う。
+
 ````
-# ログを確認すると、NginxがCSSファイルにアクセスするためにアクセス権限を変更する必要があるという内容が出ているので以下を行う。
-
 # 権限変更
 $ sudo chmod 755 /var/lib/nginx/tmp/proxy/
 
@@ -425,10 +427,10 @@ $ sudo systemctl restart nginx 
 $ sudo systemctl status nginx
 ````
 * それでもうまくいかない場合
-````
 development.rbの中の
 config.assets.debug = true を  config.assets.debug = falseに変更。
 
+````
 # unicornを再起動
 $ rake unicorn:stop
 $ rake unicorn:start
@@ -458,6 +460,7 @@ $ vim development.rb
 config.host << "ALBのDNS名" 
 ````
 * NginxとUnicornを再起動
+
 * DNS名でアクセスし確認
   ![alb_DNS](/img/lecture05/alb/dns.access.png)
 
@@ -478,8 +481,8 @@ $ config.active.storage.service:amazon
 ### 4.New Fruitから入力し反映され、バケットに保存されていることを確認
 * Nginxとunicornを再起動
 *New Fruitから入力し反映されることを確認
-![s3_up1](/img/s3/s3.app.up1.png)
-![s3_up2](/img/s3/s3.app.up2.png)
+![s3_up1](/img/lecture05/s3/s3.app.up1.png)
+![s3_up2](/img/lecture05/s3/s3.app.up2.png)
 
 ### 5. EC2で確認
 * S3バケットへのアクセスを検証
@@ -498,10 +501,11 @@ $ aws s3 cp s3://バケット名/オブジェクトのキー [ダウンロード
 ![s3_download](/img/lecture05/s3/s3test.file.png)
 ![s3_download-local](/img/lecture05/s3/s3.dl.png)
 ````
-# オブジェクト削除
+* オブジェクトを削除
+````
 $ aws s3 rm s3://バケット名/オブジェクトのキー
 ````
 ![s3_delete-local](/img/lecture05/s3/s3.delete.cm.png)
 
 ## インフラ構成図
-![lecture05_diagram](/img/lecture05/diagram/lecture05.diagram2.pdf)
+![lecture05_diagram](/img/lecture05/diagram/lecture05.diagram2.png)
