@@ -436,8 +436,8 @@ config.assets.debug = true を  config.assets.debug = falseに変更。
 # unicornを再起動
 $ rake unicorn:stop
 $ rake unicorn:start
-
-````
+````  
+  
 
 
 
