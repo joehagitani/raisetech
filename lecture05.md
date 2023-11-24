@@ -1,6 +1,6 @@
 # 第5回課題
 ## EC2上にサンプルアプリケーションをデプロイして動作させる
-### 1. 組み込みサーバーで動作
+### 1. 組み込みサーバー
 * Ruby(3.1.2)をインストール
 ````
 # パッケージアップデート
@@ -190,8 +190,8 @@ $ puma -v
 
 
 
-### 3. NginxとUnicornに分けて動作確認
-#### 3-1. Nginx
+## 3. NginxとUnicornに分けて動作確認
+### 3-1. Nginx
 * Nginxをインストール
 ````
 # amazon linux extrasでNginxをインストール
@@ -309,7 +309,7 @@ $ sudo systemctl enable nginx
 ````
 
 
-#### 3-2. Unicorn
+### 3-2. Unicorn
 * unicorn.rbを編集
 ````
 # configディレクトリのunicorn.rbを編集
@@ -328,11 +328,12 @@ $ vim Gemfile
 ````
 # Use Unicorn as the app server
 # gem 'unicorn'
-````
-````
-# ↑上記の箇所があるはずなので、ここの # gem 'unicorn' のコメント外し、この1行がなければ gem 'unicorn' をどこかに追加。
 
-#  編集したら保存して Unicorn をインストール
+# ↑上記の箇所があるはずなので、ここの # gem 'unicorn' のコメント外し、この1行がなければ gem 'unicorn' をどこかに追加。
+````
+* 編集したら保存して Unicorn をインストール
+````
+# Unicorn をインストール
 $ bundle install
 ````
 * Unicorn の起動・停止スクリプトを作成する
@@ -341,8 +342,8 @@ $ bundle install
 $ rails g task unicorn
 ````
 
-すると lib/tasks ディレクトリに unicorn.rake というファイルが生成される。
-このファイルを開いて以下を追加。
+lib/tasks ディレクトリに unicorn.rake というファイルが生成される。  
+このファイルを開いて以下を追加。  
 
 ````
 namespace :unicorn do
@@ -414,7 +415,7 @@ $ ps -ef | grep unicorn | grep -v grep
 
 #### CSSが当てられていない時に対処したこと
 
-ログを確認すると、NginxがCSSファイルにアクセスするためにアクセス権限を変更する必要があるという内容が出ているので以下を行う。
+* ログを確認すると、NginxがCSSファイルにアクセスするためにアクセス権限を変更する必要があるという内容が出ているので以下を行う。
 
 ````
 # 権限変更
@@ -426,9 +427,9 @@ $ sudo systemctl restart nginx 
 # 起動確認
 $ sudo systemctl status nginx
 ````
-* それでもうまくいかない場合
-development.rbの中の
-config.assets.debug = true を  config.assets.debug = falseに変更。
+* それでもうまくいかない場合  
+development.rbの中の  
+config.assets.debug = true を  config.assets.debug = falseに変更。  
 
 ````
 # unicornを再起動
