@@ -190,8 +190,8 @@ $ puma -v
 
 
 
-## 3. NginxとUnicornに分けて動作確認
-### 3-1. Nginx
+## NginxとUnicornに分けて動作確認
+### 1. Nginx
 * Nginxをインストール
 ````
 # amazon linux extrasでNginxをインストール
@@ -309,7 +309,7 @@ $ sudo systemctl enable nginx
 ````
 
 
-### 3-2. Unicorn
+### 2. Unicorn
 * unicorn.rbを編集
 ````
 # configディレクトリのunicorn.rbを編集
@@ -427,7 +427,8 @@ $ sudo systemctl restart nginx 
 # 起動確認
 $ sudo systemctl status nginx
 ````
-* それでもうまくいかない場合  
+* それでもうまくいかない場合 
+  
 development.rbの中の  
 config.assets.debug = true を  config.assets.debug = falseに変更。  
 
@@ -508,5 +509,5 @@ $ aws s3 rm s3://バケット名/オブジェクトのキー
 ````
 ![s3_delete-local](/img/lecture05/s3/s3.delete.cm.png)
 
-## インフラ構成図
+## 構成図
 ![lecture05_diagram](/img/lecture05/diagram/lecture05.diagram2.png)
