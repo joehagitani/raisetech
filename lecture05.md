@@ -438,7 +438,8 @@ $ rake unicorn:stop
 $ rake unicorn:start
 ````  
   
-
+ 
+ 
 
 
 ## ELB(ALB)追加
