@@ -3,15 +3,15 @@
 ### 最後にAWSを利用した日の記録 
 * イベント履歴
 ![cloudtrail](/img/lecture06/ct/cloudtrail.png)
-#### ConsoleLogin
+### ConsoleLogin
 * AWS Management Consoleにブラウザ経由でログインした時の記録
 ![ConsoleLogin](/img/lecture06/ct/CL.png)
 
-#### CheckMfa
+### CheckMfa
 * 要素認証（MFA）をチェックまたは検証する際に記録
 ![CheckMfa](/img/lecture06/ct/CM.png)
 
-#### ModifyTemporaryCredentialsOnEnvironmentEC2
+### ModifyTemporaryCredentialsOnEnvironmentEC2
 * EC2 環境における一時的な認証情報の変更 
  ![MTCOEEC2](/img/lecture06/ct/MCTOE.png)
 
@@ -23,7 +23,7 @@
 ![AmazonSNS](/img/lecture06/cw/sns.png)
 * アクションの設定
 ![action](/img/lecture06/cw/cwaction.png)
-#### Action: アラーム
+### Action: アラーム
 * ターゲットグループのヘルスステータス: Unhealthy
 ![cw_unhealthy-tg](/img/lecture06/cw/tgunhealty.png)
 * CloudWatchのアクション: アラーム状態
@@ -31,7 +31,7 @@
 ![cw_alarm-UnHealthyHostCount](/img/lecture06/cw/testaleart2.png)
 * メール通知
 ![cw_mail-alarm](/img/lecture06/cw/alearmmail.png)
-#### Action: OK
+### Action: OK
 * ターゲットグループのヘルスステータス：Healthy
 ![cw_healthy-tg](/img/lecture06/cw/tghealthy.png)
 * CloudWatchのアクション：OK
