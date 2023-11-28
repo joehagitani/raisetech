@@ -7,9 +7,10 @@
 * AWS Management Consoleにブラウザ経由でログインした時の記録
 ![ConsoleLogin](/img/lecture06/ct/CL.png)
 ### ConsoleLoginに含まれている内容３つをピックアップ
-* イベントソース
-* 発信元IPアドレス
-* イベントID
+* イベントソース: 118.110.141.197
+* 発信元IPアドレス: 2025a10c-fbfd-41d1-a94a-e49650a02bba
+* イベントID: signin.amazonaws.com
+
 
 
 ## CloudWatch 
@@ -36,7 +37,10 @@
 
 ## AWSのコスト管理
 * AWS利用料の見積<br>
-[見積り](https://calculator.aws/#/estimate?id=35e756fbef8fad1936e48916c050c43c05fc340e)
+[見積り](https://calculator.aws/#/estimate?id=35e756fbef8fad1936e48916c050c43c05fc340e) 
+
+※EC2、RDSを1日4時間の起動で見積り 
+
 * 現在の利用料金
 ![cost11](/img/lecture06/cost/cost11.png)
 * 先月のEC2利用料金
