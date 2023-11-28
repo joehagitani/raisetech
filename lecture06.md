@@ -7,9 +7,9 @@
 * AWS Management Consoleにブラウザ経由でログインした時の記録
 ![ConsoleLogin](/img/lecture06/ct/CL.png)
 ### ConsoleLoginに含まれている内容３つをピックアップ
-* イベントソース: 118.110.141.197
-* 発信元IPアドレス: 2025a10c-fbfd-41d1-a94a-e49650a02bba
-* イベントID: signin.amazonaws.com
+* イベントソース: signin.amazonaws.com
+* 発信元IPアドレス: 118.110.141.197
+* イベントID: 2025a10c-fbfd-41d1-a94a-e49650a02bba
 
 
 
