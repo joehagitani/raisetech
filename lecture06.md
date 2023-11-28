@@ -6,15 +6,10 @@
 ### ConsoleLogin
 * AWS Management Consoleにブラウザ経由でログインした時の記録
 ![ConsoleLogin](/img/lecture06/ct/CL.png)
-
-### CheckMfa
-* 要素認証（MFA）をチェックまたは検証する際に記録
-![CheckMfa](/img/lecture06/ct/CM.png)
-
-### ModifyTemporaryCredentialsOnEnvironmentEC2
-* EC2 環境における一時的な認証情報の変更 
- ![MTCOEEC2](/img/lecture06/ct/MCTOE.png)
-
+### ConsoleLoginに含まれている内容３つをピックアップ
+* イベントソース
+* 発信元IPアドレス
+* イベントID
 
 
 ## CloudWatch 
@@ -41,7 +36,7 @@
 
 ## AWSのコスト管理
 * AWS利用料の見積<br>
-[見積り](https://calculator.aws/#/estimate?id=3bf5941cdac78eed06741682c8d21a5279cdbc63)
+[見積り](https://calculator.aws/#/estimate?id=35e756fbef8fad1936e48916c050c43c05fc340e)
 * 現在の利用料金
 ![cost11](/img/lecture06/cost/cost11.png)
 * 先月のEC2利用料金
