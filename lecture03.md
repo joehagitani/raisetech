@@ -3,19 +3,19 @@
 - puma
 - ver 5.6.5
 - 再アクセス可
-- ![puma.version](/img/puma.version.png) 
-- ![puma](/img/puma.png)
+- ![puma.version](/img/lecture03/puma.version.png) 
+- ![puma](/img/lecture03/puma.png)
 ## DBサーバーの名前とバージョン
 - mySQL
 - ver 8.0.34
 - 再アクセス可
-- ![mysql.version](/img/mysql.version.png)
-- ![mysql](/img/mysql.png)
+- ![mysql.version](/img/lecture03/mysql.version.png)
+- ![mysql](/img/lecture03/mysql.png)
 ## Rails構成管理ツールの名前
 - bundler
 ## 実践課題
 - サンプルアプリケーションのデプロイ
-- ![sampleapp](/img/sampleapp.png)
+- ![sampleapp](/img/lecture03/sampleapp.png)
 ## 今回の学習から学んだこと
 - Webアプリケーションについて
 - システム開発の流れ
