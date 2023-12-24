@@ -1,12 +1,15 @@
 # 第10回課題
 
-## CloudFormation を利用し、現在までに作った環境をコード化 する。
+## CloudFormation を利用し、現在までに作った環境をコード化する。
 * テンプレートをNetwork、Security、Application に分けて作成。
+
+| CFnテンプレート|リソース内訳|
+|:--|:--|
 |CFnテンプレート|リソース内訳|
 |:--|:--|
-|Network|⚫︎ VPC<br>⚫︎ InternetGateway<br>⚫︎ InternetGatewayAttachment<br>⚫︎ PublicSubnetA,C<br>⚫︎ PrivateSubnetA,C<br>⚫︎ PublicRouteTable<br>⚫︎ PrivateRouteTable(A,C)<br>⚫︎ PublicRoute<br>⚫︎ PublicSubnet(A,C)RouteTableAssociation<br>⚫︎ PrivateSubnet(A,C)RouteTableAssociation|
-|Security|⚫︎ EC2SG (EC2 Security Group)<br>⚫︎ ALBSG (ALB Security Group)<br>⚫︎ RDS Security Group (RDSSG)<br>⚫︎ ManagedPolicy (IAM Policy)<br>⚫︎Role (IAM Role)<br>⚫︎ InstanceProfile|
-|Application|⚫︎ NewKeyPair<br>⚫︎ Ec2Instance<br>⚫︎ ALB<br>⚫︎ ListenerHTTP<br>⚫︎ TargetGroup<br>⚫︎ KmsKey<br>⚫︎ RDSSecret<br>⚫︎ RDSSubnetGroup<br>⚫︎ RDSInstance<br>⚫︎ S3Bucket| 
+|[Network](./tpl/lecture10_CFn/CFn_Network.yml)|⚫︎ VPC<br>⚫︎ InternetGateway<br>⚫︎ InternetGatewayAttachment<br>⚫︎ PublicSubnetA,C<br>⚫︎ PrivateSubnetA,C<br>⚫︎ PublicRouteTable<br>⚫︎ PrivateRouteTable(A,C)<br>⚫︎ PublicRoute<br>⚫︎ PublicSubnet(A,C)RouteTableAssociation<br>⚫︎ PrivateSubnet(A,C)RouteTableAssociation|
+|[Security](./tpl/lecture10_CFn/CFn-Security.yml)|⚫︎ EC2SG (EC2 Security Group)<br>⚫︎ ALBSG (ALB Security Group)<br>⚫︎ RDS Security Group (RDSSG)<br>⚫︎ ManagedPolicy (IAM Policy)<br>⚫︎Role (IAM Role)<br>⚫︎ InstanceProfile|
+|[Application](./tpl/lecture10_CFn/CFn-Application.yml)|⚫︎ NewKeyPair<br>⚫︎ Ec2Instance<br>⚫︎ ALB<br>⚫︎ ListenerHTTP<br>⚫︎ TargetGroup<br>⚫︎ KmsKey<br>⚫︎ RDSSecret<br>⚫︎ RDSSubnetGroup<br>⚫︎ RDSInstance<br>⚫︎ S3Bucket|
 
 
 ## リソースの内容説明
@@ -42,56 +45,74 @@
 ***
 #### PrivateSubnet(A,C)RouteTableAssociation
 * プライベートサブネットCをプライベートルートテーブルCに関連付け。  
-***
+***  
 
 ### [Security](./tpl/lecture10_CFn/CFn-Security.yml)
+***
 #### EC2SG (EC2 Security Group)
 * EC2インスタンス用のセキュリティグループ。
 * ポート80（HTTP）、ポート22（SSH）、ポート3000に対してアクセスを許可。
 * SSHとポート3000は特定のIP (MyLocalIP) からのみアクセス可能。  
+***
 #### ALBSG (ALB Security Group)
 * アプリケーションロードバランサー(ALB)用のセキュリティグループ。
 * ポート80（HTTP）に対して全てのIPからのアクセスを許可。  
+***
 #### RDSSG (RDS Security Group)
 * RDS用のセキュリティグループ。  
 * ポート3306（MySQLデータベース）に対して全てのIPからのアクセスを許可。  
+***
 ####  ManagedPolicy (IAM Policy)
 * S3バケット cfn-s3 に対する特定のアクセス権限を設定するIAMポリシー。
 * バケットリスト表示、オブジェクトの追加/取得/削除が可能。  
+***
 #### Role (IAM Role)
 * EC2インスタンスに割り当てるためのIAMロール。
 * AmazonS3FullAccess ポリシーを含む。
 * EC2がこのロールを引き受けることを許可。  
+***
 #### IInstanceProfile
 * 上記のIAMロールをEC2インスタンスに割り当てるためのインスタンスプロファイル。    
+***  
 
 ### [CFn-Application.yml](./tpl/lecture10_CFn/CFn-Application.yml)
+***
 #### NewKeyPair
 * EC2インスタンスのSSHキーを作成。  
+***
 #### Ec2Instance
 * AMI IDを使用したEC2インスタンスを設定。
 * t2.microタイプ、セキュリティグループ、パブリックIPの割り当て設定含む。  
+***
 #### ALB
 * インターネット向けALBを作成。
 * ポート80で受信し、定義されたセキュリティグループとサブネットを使用。  
+***
 #### ListenerHTTP
 * ALBにHTTPリスナーを設定。
 * ポート80で受信し、トラフィックをターゲットグループに転送。  
+***
 #### TargetGroup
 * EC2インスタンスをターゲットとするターゲットグループを作成。
 * HTTPプロトコルと健康チェック設定。  
+***
 #### KmsKey
 * RDSインスタンスの暗号化に使用するKMSキーを作成。  
+***
 #### RDSSecret
 * RDSデータベースのパスワードを管理するSecrets Managerシークレットを作成。  
+***
 #### RDSSubnetGroup
 * RDSインスタンスのためのサブネットグループを作成。  
+***
 #### RDSInstance
 * MySQLをエンジンとするRDSデータベースインスタンスを作成。
 * ストレージ、セキュリティグループ、KMSキーの設定含む。  
+***
 #### S3Bucket
 * S3バケットを作成。
 * サーバーサイド暗号化とアクセスコントロール設定含む。  
+***  
 
 ## 各スタックの構築確認
 #### Network  
