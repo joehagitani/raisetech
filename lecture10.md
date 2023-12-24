@@ -4,44 +4,44 @@
 * テンプレートをNetwork、Security、Application に分けて作成。
 |CFnテンプレート|リソース内訳|
 |:--|:--|
-|[CFn_Network.yml](./tpl/lecture10_CFn/CFn_Network.yml)|⚫︎ VPC<br>⚫︎ InternetGateway<br>⚫︎ InternetGatewayAttachment<br>⚫︎ PublicSubnetA,C<br>⚫︎ PrivateSubnetA,C<br>⚫︎ PublicRouteTable<br>⚫︎ PrivateRouteTable(A,C)<br>⚫︎ PublicRoute<br>⚫︎ PublicSubnet(A,C)RouteTableAssociation<br>⚫︎ PrivateSubnet(A,C)RouteTableAssociation|
-|[CFn-Security.yml](./tpl/lecture10_CFn/CFn-Security.yml)|⚫︎ EC2SG (EC2 Security Group)<br>⚫︎ ALBSG (ALB Security Group)<br>⚫︎ RDS Security Group (RDSSG)<br>⚫︎ ManagedPolicy (IAM Policy)<br>⚫︎Role (IAM Role)<br>⚫︎ InstanceProfile|
-|[CFn-Application.yml](./tpl/lecture10_CFn/CFn-Application.yml)|⚫︎ NewKeyPair<br>⚫︎ Ec2Instance<br>⚫︎ ALB<br>⚫︎ ListenerHTTP<br>⚫︎ TargetGroup<br>⚫︎ KmsKey<br>⚫︎ RDSSecret<br>⚫︎ RDSSubnetGroup<br>⚫︎ RDSInstance<br>⚫︎ S3Bucket| 
+|[CFn_Network.yml](./tpl/lecture10_CFn/CFn_Network.yml)|tion|
+|[CFn-Security.yml](./tpl/lecture10_CFn/CFn-Security.yml)|EC2SGle|
+|[CFn-Application.yml](./tpl/lecture10_CFn/CFn-Application.yml)|⚫S3Bucket| 
 
 ## リソースの内容説明
 ### Network
 ***
 #### VPC
-***
 * 指定されたCIDRブロック (VPCCIDR) でVPCを作成。
-* DNSサポートとホスト名の設定が有効。  
+* DNSサポートとホスト名の設定が有効。 
+***
 #### InternetGateway
+* VPCにインターネットアクセスを提供するためのインターネットゲートウェイを作成。
 ***
-* VPCにインターネットアクセスを提供するためのインターネットゲートウェイを作成。  
 #### InternetGatewayAttachment
-***
 * 作成したインターネットゲートウェイをVPCにアタッチ。  
+***
 #### PublicSubnetA,C 
-***
 * 指定されたCIDRブロック (PublicSubnetACIDR,PublicSubnetCCIDR) でパブリックサブネットを作成し、指定されたアベイラビリティゾーン (ap-northeast-1a,ap-northeast-1c) に配置。  
+***
 ####  PrivateSubnetA,C
-***
 * 指定されたCIDRブロック (PrivateSubnetACIDR,PrivateSubnetCCIDR) でプライベートサブネットを作成し、指定されたアベイラビリティゾーン (ap-northeast-1a,ap-northeast-1c)に配置。  
+***
 #### PublicRouteTable
-***
 * VPC用のパブリックルートテーブルを作成。  
+***
 #### PrivateRouteTable(A,C)
-***
 * VPC用のプライベートルートテーブルを作成。  
+***
 #### PublicRoute
-***
 * パブリックルートテーブルにインターネットへのルート (0.0.0.0/0) を設定し、インターネットゲートウェイにルーティング。  
+***
 #### PublicSubnet(A,C)RouteTableAssociation
-***
 * パブリックサブネットをパブリックルートテーブルに関連付け。  
-#### PrivateSubnet(A,C)RouteTableAssociation
 ***
+#### PrivateSubnet(A,C)RouteTableAssociation
 * プライベートサブネットCをプライベートルートテーブルCに関連付け。  
+***
 
 ### Security
 #### EC2SG (EC2 Security Group)
