@@ -5,14 +5,14 @@
 
 | CFnテンプレート|リソース内訳|
 |:--|:--|
-|CFnテンプレート|リソース内訳|
-|:--|:--|
-|[Network](./tpl/lecture10_CFn/CFn_Network.yml)|⚫︎ VPC<br>⚫︎ InternetGateway<br>⚫︎ InternetGatewayAttachment<br>⚫︎ PublicSubnetA,C<br>⚫︎ PrivateSubnetA,C<br>⚫︎ PublicRouteTable<br>⚫︎ PrivateRouteTable(A,C)<br>⚫︎ PublicRoute<br>⚫︎ PublicSubnet(A,C)RouteTableAssociation<br>⚫︎ PrivateSubnet(A,C)RouteTableAssociation|
-|[Security](./tpl/lecture10_CFn/CFn-Security.yml)|⚫︎ EC2SG (EC2 Security Group)<br>⚫︎ ALBSG (ALB Security Group)<br>⚫︎ RDS Security Group (RDSSG)<br>⚫︎ ManagedPolicy (IAM Policy)<br>⚫︎Role (IAM Role)<br>⚫︎ InstanceProfile|
-|[Application](./tpl/lecture10_CFn/CFn-Application.yml)|⚫︎ NewKeyPair<br>⚫︎ Ec2Instance<br>⚫︎ ALB<br>⚫︎ ListenerHTTP<br>⚫︎ TargetGroup<br>⚫︎ KmsKey<br>⚫︎ RDSSecret<br>⚫︎ RDSSubnetGroup<br>⚫︎ RDSInstance<br>⚫︎ S3Bucket|
+|[CFn_Network.yml](./tpl/lecture10_CFn/CFn_Network.yml)|⚫︎ VPC<br>⚫︎ InternetGateway<br>⚫︎ InternetGatewayAttachment<br>⚫︎ PublicSubnetA,C<br>⚫︎ PrivateSubnetA,C<br>⚫︎ PublicRouteTable<br>⚫︎ PrivateRouteTable(A,C)<br>⚫︎ PublicRoute<br>⚫︎ PublicSubnet(A,C)RouteTableAssociation<br>⚫︎ PrivateSubnet(A,C)RouteTableAssociation|
+|[CFn-Security.yml](./tpl/lecture10_CFn/CFn-Security.yml)|⚫︎ EC2SG (EC2 Security Group)<br>⚫︎ ALBSG (ALB Security Group)<br>⚫︎ RDS Security Group (RDSSG)<br>⚫︎ ManagedPolicy (IAM Policy)<br>⚫︎Role (IAM Role)<br>⚫︎ InstanceProfile|
+|[CFn-Application.yml](./tpl/lecture10_CFn/CFn-Application.yml)|⚫︎ NewKeyPair<br>⚫︎ Ec2Instance<br>⚫︎ ALB<br>⚫︎ ListenerHTTP<br>⚫︎ TargetGroup<br>⚫︎ KmsKey<br>⚫︎ RDSSecret<br>⚫︎ RDSSubnetGroup<br>⚫︎ RDSInstance<br>⚫︎ S3Bucket|
+<br>
 
-
-## リソースの内容説明
+## 各リソースの内容説明
+<br>
+<br>
 ### [Network](./tpl/lecture10_CFn/CFn_Network.yml)
 ***
 #### VPC
@@ -45,7 +45,10 @@
 ***
 #### PrivateSubnet(A,C)RouteTableAssociation
 * プライベートサブネットCをプライベートルートテーブルCに関連付け。  
-***  
+***
+
+<br>
+<br>
 
 ### [Security](./tpl/lecture10_CFn/CFn-Security.yml)
 ***
@@ -75,7 +78,10 @@
 * 上記のIAMロールをEC2インスタンスに割り当てるためのインスタンスプロファイル。    
 ***  
 
-### [CFn-Application.yml](./tpl/lecture10_CFn/CFn-Application.yml)
+<br>
+<br>
+
+### [Application](./tpl/lecture10_CFn/CFn-Application.yml)
 ***
 #### NewKeyPair
 * EC2インスタンスのSSHキーを作成。  
@@ -114,8 +120,11 @@
 * サーバーサイド暗号化とアクセスコントロール設定含む。  
 ***  
 
+<br>
+<br>
+
 ## 各スタックの構築確認
-#### Network  
+### Network  
 * Networkスタック作成
 ![network_stack](./img/lecture10/network/network_stack.png)  
 
@@ -123,7 +132,7 @@
 ![VPC](./img/lecture10/network/VPC.png)  
 
 
-#### Security  
+### Security  
 * Securityスタック作成
 ![Security_stack](./img/lecture10/security/security_stack.png)  
 
@@ -142,9 +151,12 @@
   * IAM Role
 ![Role](./img/lecture10/security/Role.png)  
 
+<br>
+<br>
 
 
-#### Application   * Applicationスタック作成
+### Application   
+* Applicationスタック作成
 ![Application_stack](./img/lecture10/app/app_stack.png)  
 
   * EC2
