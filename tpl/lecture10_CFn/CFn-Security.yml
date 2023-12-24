@@ -1,0 +1,163 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Security Group, IAM Role, Create
+
+Metadata:
+  "AWS::CloudFormation::Interface":
+    ParameterGroups:
+      - Label:
+          default: "Project Name"
+        Parameters:
+          - PJName
+      - Label:
+          default: "MY Local IP"
+        Parameters:
+          - MyLocalIP
+
+# ------------------------------------------------------------#
+# Input Parameters
+# ------------------------------------------------------------#
+Parameters:
+  PJName:
+    Type: String
+    Default: "CFn-lecture10"
+  MyLocalIP:
+    Type: String
+    Default: "118.110.141.197/32"
+
+Resources:
+# ------------------------------------------------------------#
+# EC2 Security Group
+# ------------------------------------------------------------#
+  EC2SG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Sub "${PJName}-EC2-SG"
+      GroupDescription: EC2-SG
+      VpcId: 
+        !ImportValue 
+          'Fn::Sub': "${PJName}-vpc"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: !Ref MyLocalIP
+        - IpProtocol: tcp
+          FromPort: 3000
+          ToPort: 3000
+          CidrIp: !Ref MyLocalIP
+      Tags:
+        - Key: Name
+          Value: !Sub "${PJName}-EC2-SG"
+# ------------------------------------------------------------#
+# ALB Security Group
+# ------------------------------------------------------------#
+  ALBSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Sub "${PJName}-ALB-SG"
+      GroupDescription: ALB-SG
+      VpcId:
+        !ImportValue
+          'Fn::Sub': "${PJName}-vpc"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: !Sub "${PJName}-ALB-SG"
+# ------------------------------------------------------------#
+# RDS Security Group
+# ------------------------------------------------------------#
+
+  RDSSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Sub "${PJName}-RDS-SG"
+      GroupDescription: RDS-SG
+      VpcId:
+        !ImportValue
+          'Fn::Sub': "${PJName}-vpc"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: !Sub "${PJName}-RDS-SG"
+
+# ------------------------------------------------------------#
+# IAM Policy
+# ------------------------------------------------------------#
+  ManagedPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: !Sub "${PJName}-IAM-S3"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - "s3:ListBucket"
+            Resource: "arn:aws:s3:::cfn-s3"
+          - Effect: Allow
+            Action:
+              - "s3:PutObject"
+              - "s3:GetObject"
+              - "s3:DeleteObject"
+            Resource: "arn:aws:s3:::cfn-s3/*"
+# ------------------------------------------------------------#
+# IAM Role
+# ------------------------------------------------------------#
+  Role:
+    Version: "2012-10-17"
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - "sts:AssumeRole"
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+# ------------------------------------------------------------#
+# Instance Profile
+# ------------------------------------------------------------#
+  InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: /
+      Roles:
+        - !Ref Role
+
+# ------------------------------------------------------------#
+# Output Parameters
+# ------------------------------------------------------------#
+Outputs:
+    EC2SG:
+      Value: !Ref EC2SG
+      Export:
+        Name: !Sub "${PJName}-EC2-SG"
+    ALBSG:
+      Value: !Ref ALBSG
+      Export:
+        Name: !Sub "${PJName}-ALB-SG"
+    RDSSG:
+      Value: !Ref RDSSG
+      Export:
+        Name: !Sub "${PJName}-RDS-SG"
+    InstanceProfile:
+      Value: !Ref InstanceProfile
+      Export:
+        Name: !Sub "${PJName}-InstanceProfile"
+
