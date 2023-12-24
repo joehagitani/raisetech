@@ -6,28 +6,41 @@
 |:--|:--|
 |[CFn_Network.yml](./tpl/lecture10_CFn/CFn_Network.yml)|⚫︎ VPC<br>⚫︎ InternetGateway<br>⚫︎ InternetGatewayAttachment<br>⚫︎ PublicSubnetA,C<br>⚫︎ PrivateSubnetA,C<br>⚫︎ PublicRouteTable<br>⚫︎ PrivateRouteTable(A,C)<br>⚫︎ PublicRoute<br>⚫︎ PublicSubnet(A,C)RouteTableAssociation<br>⚫︎ PrivateSubnet(A,C)RouteTableAssociation|
 |[CFn-Security.yml](./tpl/lecture10_CFn/CFn-Security.yml)|⚫︎ EC2SG (EC2 Security Group)<br>⚫︎ ALBSG (ALB Security Group)<br>⚫︎ RDS Security Group (RDSSG)<br>⚫︎ ManagedPolicy (IAM Policy)<br>⚫︎Role (IAM Role)<br>⚫︎ InstanceProfile|
-|[CFn-Application.yml](./tpl/lecture10_CFn/CFn-Application.yml)|⚫︎ NewKeyPair<br>⚫︎ Ec2Instance<br>⚫︎ ALB<br>⚫︎ ListenerHTTP<br>⚫︎ TargetGroup<br>⚫︎ KmsKey<br>⚫︎ RDSSecret<br>⚫︎ RDSSubnetGroup<br>⚫︎ RDSInstance<br>⚫︎ S3Bucket|    ## リソースの内容説明
+|[CFn-Application.yml](./tpl/lecture10_CFn/CFn-Application.yml)|⚫︎ NewKeyPair<br>⚫︎ Ec2Instance<br>⚫︎ ALB<br>⚫︎ ListenerHTTP<br>⚫︎ TargetGroup<br>⚫︎ KmsKey<br>⚫︎ RDSSecret<br>⚫︎ RDSSubnetGroup<br>⚫︎ RDSInstance<br>⚫︎ S3Bucket| 
+
+## リソースの内容説明
 ### Network
+***
 #### VPC
+***
 * 指定されたCIDRブロック (VPCCIDR) でVPCを作成。
 * DNSサポートとホスト名の設定が有効。  
-####  InternetGateway 
+#### InternetGateway
+***
 * VPCにインターネットアクセスを提供するためのインターネットゲートウェイを作成。  
 #### InternetGatewayAttachment
+***
 * 作成したインターネットゲートウェイをVPCにアタッチ。  
 #### PublicSubnetA,C 
+***
 * 指定されたCIDRブロック (PublicSubnetACIDR,PublicSubnetCCIDR) でパブリックサブネットを作成し、指定されたアベイラビリティゾーン (ap-northeast-1a,ap-northeast-1c) に配置。  
 ####  PrivateSubnetA,C
+***
 * 指定されたCIDRブロック (PrivateSubnetACIDR,PrivateSubnetCCIDR) でプライベートサブネットを作成し、指定されたアベイラビリティゾーン (ap-northeast-1a,ap-northeast-1c)に配置。  
 #### PublicRouteTable
+***
 * VPC用のパブリックルートテーブルを作成。  
 #### PrivateRouteTable(A,C)
+***
 * VPC用のプライベートルートテーブルを作成。  
 #### PublicRoute
+***
 * パブリックルートテーブルにインターネットへのルート (0.0.0.0/0) を設定し、インターネットゲートウェイにルーティング。  
 #### PublicSubnet(A,C)RouteTableAssociation
+***
 * パブリックサブネットをパブリックルートテーブルに関連付け。  
 #### PrivateSubnet(A,C)RouteTableAssociation
+***
 * プライベートサブネットCをプライベートルートテーブルCに関連付け。  
 
 ### Security
@@ -90,22 +103,22 @@
 
 #### Security  
 * Securityスタック作成
-![Security_stack](./img/lecture10/Security/security_stack.png)  
+![Security_stack](./img/lecture10/security/security_stack.png)  
 
   * EC2 Security Group
-![EC2SG](./img/lecture10/Security/EC2SG.png)  
+![EC2SG](./img/lecture10/security/EC2SG.png)  
 
   * ALB Security Group
-![ALBSG](./img/lecture10/Security/ALBSG.png)  
+![ALBSG](./img/lecture10/security/ALBSG.png)  
 
   * RDS Security Group
-![RDSSG](./img/lecture10/Security/RDSSG.png)  
+![RDSSG](./img/lecture10/security/RDSSG.png)  
 
   * IAM Policy
-![IAMS3](./img/lecture10/Security/IAMS3.png)  
+![IAMS3](./img/lecture10/security/IAMS3.png)  
 
   * IAM Role
-![Role](./img/lecture10/Security/Role.png)  
+![Role](./img/lecture10/security/Role.png)  
 
 
 
