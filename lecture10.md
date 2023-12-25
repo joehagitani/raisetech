@@ -64,7 +64,7 @@
 ***
 #### RDSSG (RDS Security Group)
 * RDS用のセキュリティグループ。  
-* ポート3306（MySQLデータベース）に対して全てのIPからのアクセスを許可。  
+* 特定のポートやIP範囲に関するアクセスルールは定義されていない。  
 ***
 ####  ManagedPolicy (IAM Policy)
 * S3バケット cfn-s3 に対する特定のアクセス権限を設定するIAMポリシー。
