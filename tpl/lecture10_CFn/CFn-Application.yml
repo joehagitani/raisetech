@@ -9,8 +9,9 @@ Metadata:
         Parameters:
           - PJName
       - Label:
-          default: "EC2 Instance AMI ID"
+          default: "EC2 Instance Configuration"
         Parameters:
+          - KPName
           - AMIID
       - Label:
           default: "RDS Configuration"
@@ -19,6 +20,10 @@ Metadata:
           - DBName
           
     ParameterLabels:
+      KPName:
+        default: "Key Pair Name"
+      AMIID:
+        default: "AMI ID"
       IAMID:
         default: "IAM account ID"
       DBName:
@@ -31,6 +36,10 @@ Parameters:
   PJName:
     Type: String
     Default: "CFn-lecture10"
+    
+  KPName:
+    Type: String
+    Default: "MyKeyPair"
     
   AMIID:
     Type: String
@@ -51,7 +60,7 @@ Resources:
   NewKeyPair:
     Type: 'AWS::EC2::KeyPair'
     Properties:
-      KeyName: MyKeyPair
+      KeyName: !Ref KPName
       
 # ------------------------------------------------------------#
 # EC2 Instance
@@ -61,7 +70,7 @@ Resources:
     Properties:
       ImageId: !Ref AMIID
       InstanceType: t2.micro
-      KeyName: !Ref NewKeyPair
+      KeyName: !Ref KPName
       NetworkInterfaces:
         - SubnetId: !ImportValue
             'Fn::Sub': "${PJName}-public-subnet-c"
