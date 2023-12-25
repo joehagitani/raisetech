@@ -5,7 +5,7 @@
 
 | CFnテンプレート|リソース内訳|
 |:--|:--|
-|[CFn_Network.yml](./tpl/lecture10_CFn/CFn_Network.yml)|⚫︎ VPC<br>⚫︎ InternetGateway<br>⚫︎ InternetGatewayAttachment<br>⚫︎ PublicSubnetA,C<br>⚫︎ PrivateSubnetA,C<br>⚫︎ PublicRouteTable<br>⚫︎ PrivateRouteTable(A,C)<br>⚫︎ PublicRoute<br>⚫︎ PublicSubnet(A,C)RouteTableAssociation<br>⚫︎ PrivateSubnet(A,C)RouteTableAssociation|
+|[CFn_Network.yml](./tpl/lecture10_CFn/CFn_Network.yml)|⚫︎ VPC<br>⚫︎ InternetGateway<br>⚫︎ InternetGatewayAttachment<br>⚫︎ PublicSubnet(A,C)<br>⚫︎ PrivateSubnet(A,C)<br>⚫︎ PublicRouteTable<br>⚫︎ PrivateRouteTable(A,C)<br>⚫︎ PublicRoute<br>⚫︎ PublicSubnet(A,C)RouteTableAssociation<br>⚫︎ PrivateSubnet(A,C)RouteTableAssociation|
 |[CFn-Security.yml](./tpl/lecture10_CFn/CFn-Security.yml)|⚫︎ EC2SG (EC2 Security Group)<br>⚫︎ ALBSG (ALB Security Group)<br>⚫︎ RDS Security Group (RDSSG)<br>⚫︎ ManagedPolicy (IAM Policy)<br>⚫︎Role (IAM Role)<br>⚫︎ InstanceProfile|
 |[CFn-Application.yml](./tpl/lecture10_CFn/CFn-Application.yml)|⚫︎ NewKeyPair<br>⚫︎ Ec2Instance<br>⚫︎ ALB<br>⚫︎ ListenerHTTP<br>⚫︎ TargetGroup<br>⚫︎ KmsKey<br>⚫︎ RDSSecret<br>⚫︎ RDSSubnetGroup<br>⚫︎ RDSInstance<br>⚫︎ S3Bucket|
 <br>
