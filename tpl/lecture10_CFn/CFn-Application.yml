@@ -17,6 +17,7 @@ Metadata:
         Parameters:
           - IAMID
           - DBName
+          
     ParameterLabels:
       IAMID:
         default: "IAM account ID"
@@ -30,15 +31,19 @@ Parameters:
   PJName:
     Type: String
     Default: "CFn-lecture10"
+    
   AMIID:
     Type: String
     Default: "ami-0dafcef159a1fc745"
+    
   IAMID:
     Type: String
     Default: "928152643765"
+    
   DBName:
     Type: String
     Default: "CFnDB" # １文字目アルファベット、英数字のみ
+    
 Resources:
 # ------------------------------------------------------------#
 # KeyPair
@@ -47,6 +52,7 @@ Resources:
     Type: 'AWS::EC2::KeyPair'
     Properties:
       KeyName: MyKeyPair
+      
 # ------------------------------------------------------------#
 # EC2 Instance
 # ------------------------------------------------------------#
@@ -74,6 +80,7 @@ Resources:
           dnf -y install nginx
           systemctl start nginx.service
           systemctl enable nginx.service
+          
 # ------------------------------------------------------------#
 # ALB
 # ------------------------------------------------------------#
@@ -108,6 +115,7 @@ Resources:
       LoadBalancerArn: !Ref ALB
       Port: 80
       Protocol: HTTP
+      
 # ------------------------------------------------------------#
 # Target Group
 # ------------------------------------------------------------#
@@ -138,6 +146,7 @@ Resources:
       -
         Key: Name
         Value: !Sub ${PJName}-TG
+        
 # ------------------------------------------------------------#
 # KMS Key
 # ------------------------------------------------------------#
@@ -178,6 +187,7 @@ Resources:
         GenerateStringKey: password
         PasswordLength: 16
         ExcludeCharacters: '"@/\'
+        
 # ------------------------------------------------------------#
 # RDS Subnet Group
 # ------------------------------------------------------------#
@@ -194,6 +204,7 @@ Resources:
       Tags:
         - Key: "Name"
           Value: !Sub "${PJName}-RDS-subnet-group"
+          
 # ------------------------------------------------------------#
 # RDS
 # ------------------------------------------------------------#
@@ -224,6 +235,7 @@ Resources:
       Tags:
         - Key: "Name"
           Value: !Sub "${PJName}-RDS"
+          
 # ------------------------------------------------------------#
 # S3
 # ------------------------------------------------------------#

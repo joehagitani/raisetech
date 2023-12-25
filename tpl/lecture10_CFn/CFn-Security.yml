@@ -20,9 +20,10 @@ Parameters:
   PJName:
     Type: String
     Default: "CFn-lecture10"
+    
   MyLocalIP:
     Type: String
-    Default: "118.110.141.197/32"
+    Default: "MyIPアドレスを入力"
 
 Resources:
 # ------------------------------------------------------------#
@@ -52,6 +53,7 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "${PJName}-EC2-SG"
+          
 # ------------------------------------------------------------#
 # ALB Security Group
 # ------------------------------------------------------------#
@@ -71,10 +73,10 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "${PJName}-ALB-SG"
+          
 # ------------------------------------------------------------#
 # RDS Security Group
 # ------------------------------------------------------------#
-
   RDSSG:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -112,6 +114,7 @@ Resources:
               - "s3:GetObject"
               - "s3:DeleteObject"
             Resource: "arn:aws:s3:::cfn-s3/*"
+            
 # ------------------------------------------------------------#
 # IAM Role
 # ------------------------------------------------------------#
@@ -130,6 +133,7 @@ Resources:
       Path: /
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
+        
 # ------------------------------------------------------------#
 # Instance Profile
 # ------------------------------------------------------------#
@@ -160,4 +164,3 @@ Outputs:
       Value: !Ref InstanceProfile
       Export:
         Name: !Sub "${PJName}-InstanceProfile"
-
