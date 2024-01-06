@@ -16,35 +16,35 @@ $ serverspec-init
 * このコマンドを実行すると、テスト環境の設定を行うための一連の質問に答えるよう求められる。
 	
 ```
-Select OS type:　　               #OSタイプの選択:
+Select OS type:　　             # OSタイプの選択:
 	
-1) UN*X                                 # UNIX系のOS（Linux, macOSなど）
-2) Windows                           # Windows OS
-Select number: 1                   # UN*Xなので 1 を入力
+1) UN*X                     　　# UNIX系のOS（Linux, macOSなど）
+2) Windows                      # Windows OS
+Select number: 1                # UN*Xなので 1 を入力
 	
 Select a backend type:          # テストの実行方法を選択
 	
-1) SSH                                   # リモートサーバーにSSH経由で接続
-2) Exec (local)                       # ローカル上でテストを実行
-Select number: 2                   #ローカル上なので２を選択
+1) SSH                          # リモートサーバーにSSH経由で接続
+2) Exec (local)                 # ローカル上でテストを実行
+Select number: 2                # ローカル上なので２を選択
 ```  
 	
 * 以下のディレクトリとファイルが生成される。
 ```
-+ spec/                                              # テストスクリプトを格納するディレクトリ
-+ spec/localhost/                              # ローカルマシンのテストスペックを格納するディレクトリ
++ spec/                             # テストスクリプトを格納するディレクトリ
++ spec/localhost/                   # ローカルマシンのテストスペックを格納するディレクトリ
 + spec/localhost/sample_spec.rb     # サンプルのテストスクリプト
-+ spec/spec_helper.rb                       # Serverspecの共通設定を記述するファイル
-+ Rakefile                                           # Rakeタスクを定義するファイル（Serverspecのテストを実行するためのタスクが設定されている）
++ spec/spec_helper.rb               # Serverspecの共通設定を記述するファイル
++ Rakefile                          # Rakeタスクを定義するファイル（Serverspecのテストを実行するためのタスクが設定されている）
 ```
 	
 
 ## テストコードの編集
 * 提供されたサンプルのテストコードを元に、`spec/localhost/sample_spec.rb`の内容を変更。
 * サンプルのコードに加えて、
-    1. Nginxが有効かつ稼働中であること1_1
-    1. Unicorn関連のテスト1_2
-    1. MySQL関連のテスト1_3
+    1. Nginxが有効かつ稼働中であること
+    1. Unicorn関連のテスト
+    1. MySQL関連のテスト  
    を追加  
 
 ```
@@ -98,24 +98,25 @@ describe port(3306) do
 end
 ```  
 
-## テストコードのメモ
+### テストコードのメモ
 * リソースタイプはテストの対象を、マッチャーはその対象に対する期待を表現している。
 ```
 describe リソースタイプ(**) do
   it { マッチャー }
 end
-
+```  
+```  
 # 例
 describe port(3306) do
   it { should be_listening }
 end
 ```  
 
-### リソースタイプ:
+#### リソースタイプ
 * テストの対象となる要素を指定。
 * 例ではport(3306) がリソースタイプで、特定のポート（この場合は3306）に関するテストを行うことを意味している。  
 	
-#### 主要なリソースタイプ
+##### 主要なリソースタイプ
 |リソースタイプ|説明|
 |:--|:--|
 | `package`      | 指定されたパッケージがインストールされているかをテスト |
@@ -127,7 +128,7 @@ end
 | `group`        | グループの存在や属性をテスト                  |
 
 
-### マッチャー
+#### マッチャー
 * マッチャーは、リソースに対して期待する状態や振る舞いを表す。
 * 例ではshould be_listening はマッチャーで、ポート3306がリスニング状態（接続を待ち受けている状態）であることを期待するというテストの条件を定義している。  
 	
