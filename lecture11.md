@@ -41,11 +41,11 @@ Select number: 2                # ローカル上なので２を選択
 
 ## テストコードの編集
 * 提供されたサンプルのテストコードを元に、`spec/localhost/sample_spec.rb`の内容を変更。
-* サンプルのコードに加えて、
+* サンプルのコードに加えて以下を追加
     1. Nginxが有効かつ稼働中であること
     1. Unicorn関連のテスト
     1. MySQL関連のテスト  
-   を追加  
+   
 
 ```
 require 'spec_helper'
