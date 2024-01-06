@@ -1,7 +1,7 @@
 # 第11回課題
 
 ## 課題内容
-* ServerSpec のテストが成功すること。 
+* ServerSpec のテストを成功させる。 
 * [サンプルコード](https://github.com/MasatoshiMizumoto/raisetech_documents/tree/main/aws/samples/serverspec)を使用し、授業を参考に自由な発想で内容をカスタマイズしてみる。
 
 ## 自前準備
