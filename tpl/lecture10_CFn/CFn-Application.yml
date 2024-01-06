@@ -1,0 +1,268 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: EC2 Instance, ALB, RDS, Create
+
+Metadata:
+  "AWS::CloudFormation::Interface":
+    ParameterGroups:
+      - Label:
+          default: "Project Name"
+        Parameters:
+          - PJName
+      - Label:
+          default: "EC2 Instance Configuration"
+        Parameters:
+          - KPName
+          - AMIID
+      - Label:
+          default: "RDS Configuration"
+        Parameters:
+          - IAMID
+          - DBName
+          
+    ParameterLabels:
+      KPName:
+        default: "Key Pair Name"
+      AMIID:
+        default: "AMI ID"
+      IAMID:
+        default: "IAM account ID"
+      DBName:
+        default: "DB Name"
+
+# ------------------------------------------------------------#
+# Input Parameters
+# ------------------------------------------------------------#
+Parameters:
+  PJName:
+    Type: String
+    Default: "CFn-lecture10"
+    
+  KPName:
+    Type: String
+    Default: "MyKeyPair"
+    
+  AMIID:
+    Type: String
+    Default: "ami-0dafcef159a1fc745"
+    
+  IAMID:
+    Type: String
+    Default: "928152643765"
+    
+  DBName:
+    Type: String
+    Default: "CFnDB" # １文字目アルファベット、英数字のみ
+    
+Resources:
+# ------------------------------------------------------------#
+# KeyPair
+# ------------------------------------------------------------#
+  NewKeyPair:
+    Type: 'AWS::EC2::KeyPair'
+    Properties:
+      KeyName: !Ref KPName
+      
+# ------------------------------------------------------------#
+# EC2 Instance
+# ------------------------------------------------------------#
+  Ec2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref AMIID
+      InstanceType: t2.micro
+      KeyName: !Ref KPName
+      NetworkInterfaces:
+        - SubnetId: !ImportValue
+            'Fn::Sub': "${PJName}-public-subnet-c"
+          GroupSet:
+            - !ImportValue
+                'Fn::Sub': "${PJName}-EC2-SG"
+          AssociatePublicIpAddress: 'true'
+          DeviceIndex : 0
+      Tags:
+        - Key: Name
+          Value: !Sub "${PJName}-EC2"
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          sudo su -
+          dnf -y install nginx
+          systemctl start nginx.service
+          systemctl enable nginx.service
+          
+# ------------------------------------------------------------#
+# ALB
+# ------------------------------------------------------------#
+  ALB:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      IpAddressType: ipv4
+      Name: !Sub ${PJName}-alb
+      Scheme: internet-facing
+      SecurityGroups:
+        - !ImportValue
+            'Fn::Sub': "${PJName}-ALB-SG"
+      Subnets:
+        - !ImportValue
+            'Fn::Sub': "${PJName}-public-subnet-a"
+        - !ImportValue
+            'Fn::Sub': "${PJName}-public-subnet-c"
+      Tags:
+        - Key: Name
+          Value: !Sub ${PJName}-alb
+      Type: application
+
+# ------------------------------------------------------------#
+# Listener
+# ------------------------------------------------------------#
+  ListenerHTTP:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref TargetGroup
+      LoadBalancerArn: !Ref ALB
+      Port: 80
+      Protocol: HTTP
+      
+# ------------------------------------------------------------#
+# Target Group
+# ------------------------------------------------------------#
+  TargetGroup:
+    Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
+    Properties:
+      Name: !Sub ${PJName}-TG
+      VpcId:
+        !ImportValue
+          'Fn::Sub': "${PJName}-vpc"
+      Protocol: HTTP
+      ProtocolVersion: HTTP1
+      Port: 80
+      TargetType: instance
+      Targets:
+      - Id: !Ref Ec2Instance
+      HealthCheckEnabled: true
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: /
+      HealthCheckPort: traffic-port
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 5
+      UnhealthyThresholdCount: 2
+      Matcher:
+        HttpCode: 200
+      Tags:
+      -
+        Key: Name
+        Value: !Sub ${PJName}-TG
+        
+# ------------------------------------------------------------#
+# KMS Key
+# ------------------------------------------------------------#
+  KmsKey:
+    Type: "AWS::KMS::Key"
+    Properties:
+      Description: "KMS Key for RDS encryption"
+      KeyPolicy:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !Sub 'arn:aws:iam::${IAMID}:root'
+            Action:
+              - "kms:*"
+            Resource: "*"
+          - Effect: Allow
+            Principal:
+              Service: rds.amazonaws.com
+            Action:
+              - kms:Encrypt
+              - kms:Decrypt
+              - kms:ReEncrypt*
+              - kms:GenerateDataKey*
+              - kms:DescribeKey
+            Resource: "*"
+
+# ------------------------------------------------------------#
+# RDS Secret Manger
+# ------------------------------------------------------------#
+  RDSSecret:
+    Type: "AWS::SecretsManager::Secret"
+    Properties:
+      Name: RDSSecret
+      Description: RDS password for my RDS instance
+      GenerateSecretString:
+        SecretStringTemplate: '{"username": "admin"}'
+        GenerateStringKey: password
+        PasswordLength: 16
+        ExcludeCharacters: '"@/\'
+        
+# ------------------------------------------------------------#
+# RDS Subnet Group
+# ------------------------------------------------------------#
+  RDSSubnetGroup:
+    Type: "AWS::RDS::DBSubnetGroup"
+    Properties:
+      DBSubnetGroupDescription: "RDS subnet group"
+      DBSubnetGroupName: !Sub "${PJName}-RDS-subnet-group"
+      SubnetIds:
+        - !ImportValue
+            'Fn::Sub': "${PJName}-private-subnet-a"
+        - !ImportValue
+            'Fn::Sub': "${PJName}-private-subnet-c"
+      Tags:
+        - Key: "Name"
+          Value: !Sub "${PJName}-RDS-subnet-group"
+          
+# ------------------------------------------------------------#
+# RDS
+# ------------------------------------------------------------#
+  RDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: "CFn-database"
+      DBInstanceClass: "db.t3.micro"
+      Engine: "mysql"
+      EngineVersion: "8.0.33"
+      MasterUsername: "admin"
+      MasterUserPassword: !Sub '{{resolve:secretsmanager:${RDSSecret}:SecretString:password}}'
+      DBName: !Sub "${DBName}"
+      BackupRetentionPeriod: 1
+      MultiAZ: false
+      PubliclyAccessible: false
+      StorageType: "gp2"
+      AllocatedStorage: 20
+      StorageEncrypted: true
+      KmsKeyId: !Ref KmsKey
+      CopyTagsToSnapshot: true
+      DeletionProtection: false
+      DeleteAutomatedBackups: true
+      DBSubnetGroupName: !Ref RDSSubnetGroup
+      VPCSecurityGroups:
+        - !ImportValue
+            'Fn::Sub': "${PJName}-RDS-SG"
+      Tags:
+        - Key: "Name"
+          Value: !Sub "${PJName}-RDS"
+          
+# ------------------------------------------------------------#
+# S3
+# ------------------------------------------------------------#
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: cfn-s3-bucket-1-1
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      AccessControl: Private
+      Tags:
+      -
+        Key: Name
+        Value: !Sub "${PJName}-s3"
