@@ -16,9 +16,9 @@ $ serverspec-init
 * このコマンドを実行すると、テスト環境の設定を行うための一連の質問に答えるよう求められる。
 	
 ```
-Select OS type:　　             # OSタイプの選択:
+Select OS type:　　                # OSタイプの選択:
 	
-1) UN*X                     　　# UNIX系のOS（Linux, macOSなど）
+1) UN*X                     　　   # UNIX系のOS（Linux, macOSなど）
 2) Windows                      # Windows OS
 Select number: 1                # UN*Xなので 1 を入力
 	
