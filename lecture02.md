@@ -8,10 +8,10 @@
    3. push  
    
 ## 設定内容
-* 新規リポジトリのデフォルトブランチ名をmainに変更
+* 新規リポジトリのデフォルトブランチ名をmainに変更  
 `git config --global init.defaultBranchi main`
-* ユーザー名とメールアドレス
-`git config --global user.name "ユーザー名"`
+* ユーザー名とメールアドレス  
+`git config --global user.name "ユーザー名"`  
 `git config --global user.email "Githubを登録したときに入手したno-replyメールアドレス"`  
 
 ## 第二回の講座で学んだこと
