@@ -10,7 +10,7 @@ jobs:
       - run:
           name: run cfn-lint
           command: |
-             cfn-lint -i W3002 -t /Users/JOE/Desktop/raisetech/tpl/lecture10_CFn/CFn-Security.yml
+             cfn-lint -i W3002 -t /raisetech/tpl/lecture10_CFn/CFn-Security.yml
 
 workflows:
   raisetech:
