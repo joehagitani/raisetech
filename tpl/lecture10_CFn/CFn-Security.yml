@@ -19,7 +19,7 @@ Metadata:
 Parameters:
   PJName:
     Type: String
-    Default: "CFn-lecture10"
+    efault: "CFn-lecture10"
     
   MyLocalIP:
     Type: String
