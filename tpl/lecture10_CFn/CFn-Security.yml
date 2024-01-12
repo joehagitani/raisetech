@@ -23,7 +23,7 @@ Parameters:
     
   MyLocalIP:
     Type: String
-    Default: "MyIPアドレスを入力"
+    Default: "111.168.243.135/32"
 
 Resources:
 # ------------------------------------------------------------#
@@ -119,7 +119,6 @@ Resources:
 # IAM Role
 # ------------------------------------------------------------#
   Role:
-    Version: "2012-10-17"
     Type: "AWS::IAM::Role"
     Properties:
       AssumeRolePolicyDocument:

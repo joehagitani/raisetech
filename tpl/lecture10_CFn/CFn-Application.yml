@@ -42,7 +42,7 @@ Parameters:
     Default: "MyKeyPair"
     
   AMIID:
-    Type: String
+    Type: 'AWS::EC2::Image::Id'
     Default: "ami-0dafcef159a1fc745"
     
   IAMID:
