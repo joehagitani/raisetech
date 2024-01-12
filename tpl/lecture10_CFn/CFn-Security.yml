@@ -23,7 +23,7 @@ Parameters:
     
   MyLocalIP:
     Type: String
-    Default: ""IP address allowed to access EC2"
+    Default: "IP address allowed to access EC2"
 
 Resources:
 # ------------------------------------------------------------#
