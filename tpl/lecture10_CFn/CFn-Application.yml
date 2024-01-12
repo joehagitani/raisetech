@@ -261,8 +261,21 @@ Resources:
         BlockPublicPolicy: false
         IgnorePublicAcls: false
         RestrictPublicBuckets: false
-      AccessControl:  "BucketOwnerFullControl"
       Tags: 
       -
         Key: Name
         Value: !Sub "${PJName}-s3"
+
+S3BucketPolicy:
+  Type: AWS::S3::BucketPolicy
+  Properties:
+    Bucket: !Ref S3Bucket
+    PolicyDocument:
+      Statement:
+        - Sid: PublicReadForGetBucketObjects
+          Effect: Allow
+          Principal: "*"
+          Action:
+            - s3:GetObject
+          Resource: 
+            - Fn::Sub: arn:aws:s3:::${S3Bucket}/*
