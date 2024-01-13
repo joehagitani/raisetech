@@ -2,7 +2,7 @@
 
 ## 課題内容
 * 提供された[CircleCI のサンプルコンフィグ](https://github.com/MasatoshiMizumoto/raisetech_documents/tree/main/aws/samples/circleci)を使用し、正しく動作するようにリポジトリに組み込む。
-
+<br>
 
 ## 自前準備
 * CircleCIユーザー登録
@@ -34,11 +34,11 @@ $ pbcopy < ~/.ssh/project_key
  * プロジェクト作成を実行。
 <br>
 	
-## 公式ドキュメント通りに操作して動作を確認。
+## 公式ドキュメント通りに操作して動作を確認
  * [circleCIのスタートガイド](https://circleci.com/docs/ja/getting-started/)の手順通りに進め、`Hello, World`を確認。
 
 ![CIhello](./img/lecture12/CIhello.png)  
-
+<br>
 ## ローカルCLIのインストール  
 [CLIインストール公式doc](https://circleci.com/docs/ja/local-cli/)
 * ターミナルで以下を実行
@@ -117,7 +117,7 @@ Config file at .circleci/config.yml is valid.
 * Roleリソースで不正な属性Versionが使用されている。 
 * MyLocalIPパラメータのデフォルト値が正しい形式でない。 
 * S3バケットのアクセスコントロールを直接指定する代わりに、`AWS::S3::BucketPolicy`を使用することを推奨している。    
-
+<br>
 ## 修正の結果
  * [CFn_Network.yml](./tpl/lecture10_CFn/CFn_Network.yml)、[CFn-Security.yml](./tpl/lecture10_CFn/CFn-Security.yml)、[CFn-Application.yml](./tpl/lecture10_CFn/CFn-Application.yml)をそれぞれエラーの要望通りに修正し再度push。
 ### Successを確認
