@@ -23,10 +23,8 @@ $ ssh-keygen -t ed25519 -f ~/.ssh/project_key -C email@example.com
 ```
 $ pbcopy < ~/.ssh/project_key.pub
 ```  
-<br>
  * コピーしたpublic SSH keyを[GitHub のデプロイキーとしてリポジトリに追加。](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#set-up-deploy-keys)  
 
-<br>
 
  * `pbcopy` コマンドでprivate SSH keyをコピーし、Create New Projectのprivate SSH keyフィールドにペースト。
 ```
