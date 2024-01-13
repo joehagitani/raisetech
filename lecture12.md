@@ -118,6 +118,7 @@ Config file at .circleci/config.yml is valid.
 * MyLocalIPパラメータのデフォルト値が正しい形式でない。 
 * S3バケットのアクセスコントロールを直接指定する代わりに、`AWS::S3::BucketPolicy`を使用することを推奨している。    
 <br>
+
 ## 修正の結果
  * [CFn_Network.yml](./tpl/lecture10_CFn/CFn_Network.yml)、[CFn-Security.yml](./tpl/lecture10_CFn/CFn-Security.yml)、[CFn-Application.yml](./tpl/lecture10_CFn/CFn-Application.yml)をそれぞれエラーの要望通りに修正し再度push。
 ### Successを確認
