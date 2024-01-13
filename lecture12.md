@@ -7,7 +7,8 @@
 ## 自前準備
 * CircleCIユーザー登録
 * githubと連携させる
-* CLIインストール
+* CLIインストール  
+<br>
 
 
 ## デプロイキーを設定  
@@ -22,7 +23,7 @@ $ ssh-keygen -t ed25519 -f ~/.ssh/project_key -C email@example.com
 ```
 $ pbcopy < ~/.ssh/project_key.pub
 ```  
-
+<br>
  * コピーしたpublic SSH keyを[GitHub のデプロイキーとしてリポジトリに追加。](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#set-up-deploy-keys)  
 <br>
 
@@ -32,7 +33,7 @@ $ pbcopy < ~/.ssh/project_key
 ```  
  * リポジトリを選択し、プロジェクト名を記入。
  * プロジェクト作成を実行。
-
+<br>
 	
 ## 公式ドキュメント通りに操作して動作を確認。
  * [circleCIのスタートガイド](https://circleci.com/docs/ja/getting-started/)の手順通りに進め、`Hello, World`を確認。
@@ -48,9 +49,10 @@ $ curl-fLSshttps://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master
 ```
  *  CircleCI の CLI ツールは、デフォルトで /usr/local/bin ディレクトリにインストールされる。
  *  /usr/local/bin への書き込みアクセス権を持っていない場合は、上記コマンドのパイプと bash の間に sudo を挿入して実行。  
+<br>
 
 ## CLI の設定
- * CLIを使用する前に[Personal API Tokensを生成](https://app.circleci.com/settings/user/tokens)
+ * CLIを使用する前に[Personal API Tokensを生成。](https://app.circleci.com/settings/user/tokens)
  * 生成したAPIトークンをコピーし保管。
 
  * トークンを取得したら、以下を実行して CLI を設定。
@@ -59,6 +61,7 @@ $ circleci setup
 ```
 * `CircleCI API Token`でPersonal API Tokensをペースト。
 * `/Users/user_name/.circleci/cli.yml.`に設定が保存される。  
+<br>
 
 ## コンフィグファイルを作成
  * `/.circleci`に`config.yml`を作成し、CircleCI のサンプルコンフィグをペースト
@@ -83,7 +86,8 @@ workflows:
       - cfn-lint
 
 ```
-※  <u>`.circleci`ディレクトリがリポジトリ外にあったらリポジトリ内に移動させる。</u>  
+※  `.circleci`ディレクトリがリポジトリ外にあったらリポジトリ内に移動させる。  
+<br>  
 
  * `.circleci`ディレクトリの一つ上の階層に移動し、以下を実行。
 ```
@@ -95,16 +99,19 @@ $ circleci config validate
 ```
 Config file at .circleci/config.yml is valid.
 ```  
+<br>
 
 ## 動作の確認
-<u>### lecture12ブランチを作成し、.circleci/config.ymlをpushする。</u>
+### lecture12ブランチを作成し、.circleci/config.ymlをpushする。
  * 最初は サンプルコンフィグのディレクトリパスを `/Users/JOE/Desktop/raisetech/tpl/lecture10_CFn/CFn_Network.yml`にしていた為、以下のエラーが出た。
 ![error1](./img/lecture12/error1.png)   
 このエラーからわかることは、指定されたファイルパスに存在しないテンプレートファイルをCFnLintが読み込もうとして失敗したということ。  
+<br>
 
  * パスをリポジトリのディレクトリ１つ下階層からにし、ファイル名を`*.yml`変更し実行。
 ![error2](./img/lecture12/error2.png)   
 画像のようなエラーが出てくる。
+<br>
 
 ### エラーの内容
 * AZがハードコードされている為、テンプレートの柔軟性が低下している。
@@ -114,5 +121,5 @@ Config file at .circleci/config.yml is valid.
 
 ## 修正の結果
  * [CFn_Network.yml](./tpl/lecture10_CFn/CFn_Network.yml)、[CFn-Security.yml](./tpl/lecture10_CFn/CFn-Security.yml)、[CFn-Application.yml](./tpl/lecture10_CFn/CFn-Application.yml)をそれぞれエラーの要望通りに修正し再度push。
-### Successを確認。
+### Successを確認
 ![Success](./img/lecture12/Success.png)   
