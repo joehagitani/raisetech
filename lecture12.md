@@ -46,8 +46,8 @@ $ pbcopy < ~/.ssh/project_key
 # Mac と Linux の場合
 $ curl-fLSshttps://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh |bash
 ```
- *  CircleCI の CLI ツールは、デフォルトで /usr/local/bin ディレクトリにインストールされる。
- *  /usr/local/bin への書き込みアクセス権を持っていない場合は、上記コマンドのパイプと bash の間に sudo を挿入して実行。  
+ *  CircleCI の CLI ツールは、デフォルトで `/usr/local/bin` ディレクトリにインストールされる。
+ *  `/usr/local/bin` への書き込みアクセス権を持っていない場合は、上記コマンドのパイプと bash の間に sudo を挿入して実行。  
 <br>
 
 ## CLI の設定
@@ -101,13 +101,13 @@ Config file at .circleci/config.yml is valid.
 <br>
 
 ## 動作の確認
-### lecture12ブランチを作成し、.circleci/config.ymlをpushする。
+### lecture12ブランチを作成し、`.circleci/config.yml`をpushする。
  * 最初は サンプルコンフィグのディレクトリパスを `/Users/JOE/Desktop/raisetech/tpl/lecture10_CFn/CFn_Network.yml`にしていた為、以下のエラーが出た。
 ![error1](./img/lecture12/error1.png)   
 このエラーからわかることは、指定されたファイルパスに存在しないテンプレートファイルをCFnLintが読み込もうとして失敗したということ。  
 <br>
 
- * パスをリポジトリのディレクトリ１つ下階層からにし、ファイル名を`*.yml`変更し実行。
+ * パスをリポジトリのディレクトリ１つ下階層からにし、ファイル名を`*.yml`に変更し実行。
 ![error2](./img/lecture12/error2.png)   
 画像のようなエラーが出てくる。
 <br>
