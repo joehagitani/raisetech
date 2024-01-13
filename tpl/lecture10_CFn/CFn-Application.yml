@@ -257,10 +257,10 @@ Resources:
           - ServerSideEncryptionByDefault:
               SSEAlgorithm: AES256
       PublicAccessBlockConfiguration:
-        BlockPublicAcls: false
-        BlockPublicPolicy: false
-        IgnorePublicAcls: false
-        RestrictPublicBuckets: false
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
       Tags: 
       -
         Key: Name
@@ -277,5 +277,4 @@ Resources:
             Principal: "*"
             Action:
               - s3:GetObject
-            Resource: 
-              - Fn::Sub: arn:aws:s3:::${S3Bucket}/*
+            Resource: !Sub "arn:aws:s3:::${S3Bucket}/*"
