@@ -42,7 +42,7 @@ Parameters:
     Default: "MyKeyPair"
     
   AMIID:
-    Type: String
+    Type: 'AWS::EC2::Image::Id'
     Default: "ami-0dafcef159a1fc745"
     
   IAMID:
@@ -257,12 +257,24 @@ Resources:
           - ServerSideEncryptionByDefault:
               SSEAlgorithm: AES256
       PublicAccessBlockConfiguration:
-        BlockPublicAcls: false
-        BlockPublicPolicy: false
-        IgnorePublicAcls: false
-        RestrictPublicBuckets: false
-      AccessControl: Private
-      Tags:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags: 
       -
         Key: Name
         Value: !Sub "${PJName}-s3"
+
+  S3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3Bucket
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: "*"
+            Action:
+              - s3:GetObject
+            Resource: !Sub "arn:aws:s3:::${S3Bucket}/*"
