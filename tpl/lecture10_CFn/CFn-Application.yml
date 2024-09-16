@@ -35,11 +35,11 @@ Metadata:
 Parameters:
   PJName:
     Type: String
-    Default: "CFn-lecture10"
+    Default: "CFn-test"
     
   KPName:
     Type: String
-    Default: "MyKeyPair"
+    Default: "MyKeyPairTest"
     
   AMIID:
     Type: 'AWS::EC2::Image::Id'
@@ -51,7 +51,7 @@ Parameters:
     
   DBName:
     Type: String
-    Default: "CFnDB" # １文字目アルファベット、英数字のみ
+    Default: "CFnDBtest" # １文字目アルファベット、英数字のみ
     
 Resources:
 # ------------------------------------------------------------#
