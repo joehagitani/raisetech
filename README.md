@@ -40,7 +40,7 @@
 <br>
 <br>
 
-## 直近の完了課題
+## 直近の完了課題詳細
 ### [第10回課題](./lecture12.md)
 第5回の課題で構築した環境（上図）をCloudFormationでコード化し、自動で環境が構築されることを確認。
 <br>
@@ -64,7 +64,7 @@ CircleCIを使用し第10回の課題で作成した`yml`ファイルをチェ�
 <br>
 
 ## 現在取り組んでいる課題の構成図
-![lecture05_diagram](/img/lecture05/diagram/lecture05.drawio.png)
+![lecture05_diagram](/img/README/lecture13diagram.jpg)
 
 <br>
 <br>
