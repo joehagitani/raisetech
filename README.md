@@ -72,5 +72,4 @@ CircleCIを使用し第10回の課題で作成した`yml`ファイルをチェ�
 ## 2024年9月現在
 - AWS Certified Solutions Architect - Associate 取得済み
 - RaiseTech AWSコース 第13回課題取り組み中
-- RaiseTech受講生同士のチーム開発に参加中# raisetech
-My First repository
+- RaiseTech受講生同士のチーム開発に参加中
