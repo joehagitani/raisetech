@@ -64,7 +64,7 @@ CircleCIを使用し第10回の課題で作成した`yml`ファイルをチェ�
 <br>
 
 ## 現在取り組んでいる課題の構成図
-![lecture13_diagram](/img/README/lecture13diagram.pdf)
+![lecture13_diagram](/img/README/lecture13diagram.jpg)
 
 <br>
 <br>
