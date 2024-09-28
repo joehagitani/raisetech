@@ -64,11 +64,13 @@ CircleCIを使用し第10回の課題で作成した`yml`ファイルをチェ�
 
 <br>
 <br>
+
 ## 第13回課題概要
 - CircleCIを使用し、CloudFormationテンプレート・SERVERSPEC・Ansibleを走らせ、AWSの環境構築・サーバー構築・アプリケーションデプロイ・サーバーテストを自動で実行する。
     - [第10回](./lecture10.md)の課題で作成したCloudFormationのテンプレートを自動構築
     - Ansibleにて[第5回](./lecture05.md)の課題で行ったサーバーの構成をコード化し、構築とデプロイを自動化
     - SeverSpecにて構築されたサーバーを自動でテスト
+
 <br>
 <br>
 
