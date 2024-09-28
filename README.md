@@ -30,10 +30,6 @@
 <br>
 
 ## CloudFormationで構築した環境
-
-<br>
-<br>
-
 ![lecture05_diagram](/img/lecture05/diagram/lecture05.drawio.png)
 
 <br>
@@ -55,7 +51,7 @@ CircleCIを使用し第10回の課題で作成した`yml`ファイルをチェ�
 <br>
 
 ### 【 工夫した点 】
-- [第10回](./lecture10.md)の課題、Cloudformationのテンプレートに関しては、極力パラメーターの入力だけでスタック作成をできるよう工夫した。
+- [第10回](./lecture10.md)の課題、Cloudformationのテンプレートに関しては、極力パラメーターの入力だけでスタック作成をできるよう工夫し、ハードコードしないようにした。
 - [第5回](./lecture05.md)、[第11回](./lecture11.md)、[第12回](./lecture12.md)の課題は、誰でも再現できるよう手順を細かく記載した。
 - リポジトリをわかりやすく極力シンプルにまとめた。
 
@@ -66,6 +62,13 @@ CircleCIを使用し第10回の課題で作成した`yml`ファイルをチェ�
 ## 現在取り組んでいる課題の構成図
 ![lecture13_diagram](/img/README/lecture13diagram.jpg)
 
+<br>
+<br>
+## 第13回課題概要
+- CircleCIを使用し、CloudFormationテンプレート・SERVERSPEC・Ansibleを走らせ、AWSの環境構築・サーバー構築・アプリケーションデプロイ・サーバーテストを自動で実行する。
+    - [第10回](./lecture10.md)の課題で作成したCloudFormationのテンプレートを自動構築
+    - Ansibleにて[第5回](./lecture05.md)の課題で行ったサーバーの構成をコード化し、構築とデプロイを自動化
+    - SeverSpecにて構築されたサーバーを自動でテスト
 <br>
 <br>
 
